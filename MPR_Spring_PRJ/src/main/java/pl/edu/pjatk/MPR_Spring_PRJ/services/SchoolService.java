@@ -20,5 +20,9 @@ public class SchoolService {
         return this.schoolList;
     }
 
+    public void createSchool(School school) {
+        this.schoolList.add(school);
+    }
+
 
 }
