@@ -24,5 +24,9 @@ public class SchoolService {
         this.schoolList.add(school);
     }
 
+    public School getSchool(int id) {
+        return this.schoolList.get(id);
+    }
+
 
 }

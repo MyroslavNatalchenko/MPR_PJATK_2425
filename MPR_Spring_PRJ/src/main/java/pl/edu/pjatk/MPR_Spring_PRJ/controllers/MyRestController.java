@@ -2,10 +2,7 @@ package pl.edu.pjatk.MPR_Spring_PRJ.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AliasFor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.services.SchoolService;
 
@@ -23,6 +20,11 @@ public class MyRestController {
     @GetMapping("school/all")
     public List<School> getAll() {
         return this.schoolService.getSchoolList();
+    }
+
+    @GetMapping("school/{id}")
+    public School getSchoolById(@PathVariable int id) {
+        return this.schoolService.getSchool(id);
     }
 
     @PostMapping("school") //POST - tworzyc
