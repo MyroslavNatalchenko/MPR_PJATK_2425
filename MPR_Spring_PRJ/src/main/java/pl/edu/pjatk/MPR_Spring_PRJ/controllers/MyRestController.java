@@ -1,7 +1,6 @@
 package pl.edu.pjatk.MPR_Spring_PRJ.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.AliasFor;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.services.SchoolService;
@@ -30,5 +29,20 @@ public class MyRestController {
     @PostMapping("school") //POST - tworzyc
     public void create(@RequestBody final School school) {
         this.schoolService.createSchool(school);
+    }
+
+
+    /*
+    Made at home 08.10.2024
+     */
+    @DeleteMapping("/school/delete/{id}")
+    public void delete(@PathVariable int id)
+    {
+        this.schoolService.removeSchool(id);
+    }
+
+    @PutMapping("/school/mod/{id}")
+    public void modificate(@PathVariable int id, @RequestBody final School school){
+        this.schoolService.modSchool(id,school);
     }
 }

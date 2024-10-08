@@ -28,5 +28,16 @@ public class SchoolService {
         return this.schoolList.get(id);
     }
 
+    /*
+    Made at home 08.10.2024
+     */
+    public void removeSchool(int id){
+        this.schoolList.remove(id);
+    }
+
+    public void modSchool(int id, School school){
+        schoolList.get(id).setName(school.getName());
+        schoolList.get(id).setNumber(school.getNumber());
+    }
 
 }
