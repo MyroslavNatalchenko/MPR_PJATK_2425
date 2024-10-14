@@ -14,13 +14,6 @@ public class School {
     private int number;
     private Long indetyfikator;
 
-    private Long countIndenticator(){
-        int inde
-        for (char c : this.name.toCharArray()) {
-            suma += (int) c;
-        }
-        return indetyfikator;
-    }
     public School() {}
 
     public School(String name, int number) {
@@ -52,10 +45,26 @@ public class School {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    /*
+    Indetyfikator core
+     */
+    private Long countIndenticator(){
+        long indetyfikator= 0L;
+        for (char c : this.name.toCharArray()) {
+            indetyfikator+=(long) c;
+        }
+        int n=this.number;
+        while (n!=0){
+            indetyfikator+=(long) (n%10);
+            n/=10;
+        }
+        return indetyfikator;
+    }
     public Long getIndetyfikator() {
         return indetyfikator;
     }
-
     public void setIndetyfikator(Long indetyfikator) {
         this.indetyfikator = indetyfikator;
     }
