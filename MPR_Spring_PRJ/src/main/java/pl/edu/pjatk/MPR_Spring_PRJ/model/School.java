@@ -50,7 +50,7 @@ public class School {
     /*
     Indetyfikator core
      */
-    private Long countIndenticator(){
+    public Long countIndenticator(){
         long indetyfikator= 0L;
         for (char c : this.name.toCharArray()) {
             indetyfikator+=(long) c;

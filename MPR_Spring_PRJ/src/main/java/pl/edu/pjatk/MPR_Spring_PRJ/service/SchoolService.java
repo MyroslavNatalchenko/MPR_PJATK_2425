@@ -49,6 +49,7 @@ public class SchoolService {
             if (schoolOptional.isPresent()) {
                 schoolOptional.get().setName(school.getName());
                 schoolOptional.get().setNumber(school.getNumber());
+                schoolOptional.get().setIndetyfikator(school.countIndenticator());
                 schoolRepository.save(schoolOptional.get());
             }
             else throw new RuntimeException("School not found");
