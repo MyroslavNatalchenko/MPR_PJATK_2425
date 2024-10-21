@@ -19,16 +19,19 @@ public class Car {
         return fuelAmount > 15 && battery > 15;
     }
 
-    public void drive(double kilometers) {
+    public boolean drive(double kilometers) {
         double fuelNeeded = kilometers*fuelConsumption;
         if (turnOn()) {
             if (fuelAmount >= fuelNeeded) {
                 distanceTravelled += kilometers;
                 fuelAmount -= fuelNeeded;
-                System.out.println("Car drove " + kilometers + " kilometers.");
+                return true;
             } else {
-                System.out.println("Nie starczy paliwa");
+                return false;
             }
+        }
+        else {
+            return false;
         }
     }
 

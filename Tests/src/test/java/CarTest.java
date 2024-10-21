@@ -70,4 +70,48 @@ public class CarTest {
         assertFalse(result);
         assertEquals(20, car.getFuelAmount());
     }
+
+    @Test
+    public void carDriveWithTurnOnAndAllNice() {
+        Car car = new Car(30,50,50,0.8,0);
+
+        boolean result=car.drive(10);
+
+        assertTrue(result);
+        assertEquals(42, car.getFuelAmount());
+        assertEquals(10, car.getDistanceTravelled());
+    }
+
+    @Test
+    public void carDriveWithTurnOffAndAllNice1() {
+        Car car = new Car(0,50,50,0.8,0);
+
+        boolean result=car.drive(10);
+
+        assertFalse(result);
+        assertEquals(50, car.getFuelAmount());
+        assertEquals(0, car.getDistanceTravelled());
+    }
+
+    @Test
+    public void carDriveWithTurnOffAndAllNice2() {
+        Car car = new Car(30,0,50,0.8,0);
+
+        boolean result=car.drive(10);
+
+        assertFalse(result);
+        assertEquals(0, car.getFuelAmount());
+        assertEquals(0, car.getDistanceTravelled());
+    }
+
+    @Test
+    public void carDriveWithTurnOnAndTooMuchDrive() {
+        Car car = new Car(30,50,50,0.8,0);
+
+        boolean result=car.drive(100);
+
+        assertFalse(result);
+        assertEquals(50, car.getFuelAmount());
+        assertEquals(0, car.getDistanceTravelled());
+    }
 }
