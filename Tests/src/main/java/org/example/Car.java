@@ -34,15 +34,57 @@ public class Car {
 
     public boolean refuel(double amount) {
         if (amount > 0) {
-            if (fuelAmount + amount <= fuelCapacity) {
-                fuelAmount += amount;
-                return true;
-            } else {
-                fuelAmount=fuelCapacity;
-                return true;
-            }
+            this.fuelAmount = Math.min(this.fuelAmount + amount, fuelCapacity);
+            return true;
+//            if (fuelAmount + amount <= fuelCapacity) {
+//                fuelAmount += amount;
+//                return true;
+//            } else {
+//                fuelAmount=fuelCapacity;
+//                return true;
+//            }
         } else {
             return false;
         }
+    }
+
+    public double getBattery() {
+        return battery;
+    }
+
+    public void setBattery(double battery) {
+        this.battery = battery;
+    }
+
+    public double getFuelAmount() {
+        return fuelAmount;
+    }
+
+    public void setFuelAmount(double fuelAmount) {
+        this.fuelAmount = fuelAmount;
+    }
+
+    public double getFuelCapacity() {
+        return fuelCapacity;
+    }
+
+    public void setFuelCapacity(double fuelCapacity) {
+        this.fuelCapacity = fuelCapacity;
+    }
+
+    public double getFuelConsumption() {
+        return fuelConsumption;
+    }
+
+    public void setFuelConsumption(double fuelConsumption) {
+        this.fuelConsumption = fuelConsumption;
+    }
+
+    public double getDistanceTravelled() {
+        return distanceTravelled;
+    }
+
+    public void setDistanceTravelled(double distanceTravelled) {
+        this.distanceTravelled = distanceTravelled;
     }
 }
