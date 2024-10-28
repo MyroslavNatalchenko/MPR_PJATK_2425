@@ -12,11 +12,13 @@ import java.util.Optional;
 @Component
 public class SchoolService {
     private SchoolRepository schoolRepository;
-    List<School> schoolList = new ArrayList<>();
+    private List<School> schoolList = new ArrayList<>();
+    private StringUtilsService stringUtilsService;
 
     @Autowired
-    public SchoolService(SchoolRepository schoolRepository) {
+    public SchoolService(SchoolRepository schoolRepository, StringUtilsService stringUtilsService) {
         this.schoolRepository = schoolRepository;
+        this.stringUtilsService = stringUtilsService;
 
         this.schoolRepository.save(new School("PJATK WWA", 1));
         this.schoolRepository.save(new School("PJATK GDN", 2));
@@ -24,22 +26,38 @@ public class SchoolService {
     }
 
     public List<School> getByName(String name) {
-        return this.schoolRepository.findByName(name);
+        List<School> schoolList = this.schoolRepository.findByName(name);
+        for (School school : schoolList) {
+            stringUtilsService.Lower(school);
+        }
+        return schoolList;
     }
 
     public List<School> getByNumber(int number) {
-        return this.schoolRepository.findByNumber(number);
+        List<School> schoolList = this.schoolRepository.findByNumber(number);
+        for (School school : schoolList) {
+            stringUtilsService.Lower(school);
+        }
+        return schoolList;
     }
 
     public Optional<School> getByID(Long id) {
-        return schoolRepository.findById(id);
+        Optional<School> school = this.schoolRepository.findById(id);
+        stringUtilsService.Lower(school.get());
+        return school;
     } //Optional w extend clasie
 
     public List<School> getAll() {
-        return (List<School>) this.schoolRepository.findAll(); //pereformat w List
+        List<School> schoolList = (List<School>) this.schoolRepository.findAll();
+        for (School school : schoolList) {
+            stringUtilsService.Lower(school);
+        }
+        return schoolList;
     }
 
     public void createSchool(School school) {
+        stringUtilsService.Upper(school);
+        school.setIndetyfikator(school.countIndenticator());
         this.schoolRepository.save(school);
     }
 
