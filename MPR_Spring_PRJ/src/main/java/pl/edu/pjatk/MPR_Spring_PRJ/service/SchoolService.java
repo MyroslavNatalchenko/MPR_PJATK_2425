@@ -2,6 +2,7 @@ package pl.edu.pjatk.MPR_Spring_PRJ.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.edu.pjatk.MPR_Spring_PRJ.exception.SchoolNotFoundException;
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.repository.SchoolRepository;
 
@@ -41,14 +42,14 @@ public class SchoolService {
         return schoolList;
     }
 
-    public Optional<School> getByID(Long id) {
-
+    public School getByID(Long id) {
         Optional<School> school = this.schoolRepository.findById(id);
-        if (school.isPresent()) {
-            stringUtilsService.Lower(school.get());
-            return school;
+        if (school.isEmpty()) {
+            throw new SchoolNotFoundException();
         }
-        return null;
+        School res = school.get();
+        stringUtilsService.Lower(res);
+        return res;
     } //Optional w extend clasie
 
     public List<School> getAll() {

@@ -3,6 +3,7 @@ package pl.edu.pjatk.MPR_Spring_PRJ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import pl.edu.pjatk.MPR_Spring_PRJ.exception.SchoolNotFoundException;
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.repository.SchoolRepository;
 import pl.edu.pjatk.MPR_Spring_PRJ.service.SchoolService;
@@ -62,26 +63,27 @@ public class SchoolServiceTest {
     }
 
     @Test
-    public void testGetByIDReturnsLowerCaseSchool() {
+    public void testGetByIDReturnsSchoolInLowerCase() {
         School school = new School("Julkia", 1010);
-        when(schoolRepository.findById(1L)).thenReturn(Optional.of(school));
+        when(schoolRepository.findById(0L)).thenReturn(Optional.of(school));
 
-        Optional<School> result = schoolService.getByID(1L);
+        School result = schoolService.getByID(0L);
 
-        assertTrue(result.isPresent());
-        assertEquals(school, result.get());
         verify(stringUtilsService, times(1)).Lower(school);
+
+        assertEquals("Julkia", result.getName());
     }
+
 
     @Test
-    public void testGetByIDReturnsEmptyOptionalWhenNotFound() {
+    public void testGetByIDThrowsSchoolNotFoundExceptionWhenNotFound() {
         when(schoolRepository.findById(1L)).thenReturn(Optional.empty());
 
-        Optional<School> result = schoolService.getByID(1L);
+        assertThrows(SchoolNotFoundException.class, () -> schoolService.getByID(1L));
 
-        assertTrue(result == null);
         verify(stringUtilsService, never()).Lower(any());
     }
+
 
     @Test
     public void testGetAllReturnsLowerCaseSchools() {
