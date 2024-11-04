@@ -42,9 +42,13 @@ public class SchoolService {
     }
 
     public Optional<School> getByID(Long id) {
+
         Optional<School> school = this.schoolRepository.findById(id);
-        stringUtilsService.Lower(school.get());
-        return school;
+        if (school.isPresent()) {
+            stringUtilsService.Lower(school.get());
+            return school;
+        }
+        return null;
     } //Optional w extend clasie
 
     public List<School> getAll() {
@@ -68,7 +72,7 @@ public class SchoolService {
                 schoolOptional.get().setName(school.getName());
                 schoolOptional.get().setNumber(school.getNumber());
                 schoolOptional.get().setIndetyfikator(school.countIndenticator());
-                schoolRepository.save(schoolOptional.get());
+                schoolRepository.save(schoolOptional. get());
             }
             else throw new RuntimeException("School not found");
         }
@@ -99,3 +103,4 @@ public class SchoolService {
         schoolList.get(id).setNumber(school.getNumber());
     }
 */
+
