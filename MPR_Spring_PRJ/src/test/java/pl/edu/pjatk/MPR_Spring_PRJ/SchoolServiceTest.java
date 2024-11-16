@@ -112,11 +112,12 @@ public class SchoolServiceTest {
 
     @Test
     public void testRemoveSchoolDeletesById() {
-        Long schoolId = 1L;
+        School school = new School("PJATKA", 1);
+        when(schoolRepository.findById(1L)).thenReturn(Optional.of(school));
 
-        schoolService.removeSchool(schoolId);
+        schoolService.removeSchool(1L);
 
-        verify(schoolRepository, times(1)).deleteById(schoolId);
+        verify(schoolRepository, times(1)).deleteById(1L);
     }
 
     // ********************************************

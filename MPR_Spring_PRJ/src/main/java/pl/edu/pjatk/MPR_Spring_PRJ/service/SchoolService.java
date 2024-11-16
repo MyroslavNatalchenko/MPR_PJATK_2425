@@ -9,9 +9,8 @@ import pl.edu.pjatk.MPR_Spring_PRJ.exception.SchoolWithThisIndentificatorAlready
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.repository.SchoolRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class SchoolService {
@@ -73,11 +72,11 @@ public class SchoolService {
     }
 
     public void createSchool(School school) {
-        List<School> find = (List<School>) this.schoolRepository.findAll();
-        double indet = school.countIndenticator();
-        for (School school1: find){
-            if (indet == school1.getIndetyfikator()) throw new SchoolWithThisIndentificatorAlreadyExistException();
-        }
+        HashSet<Long> index = ((List<School>) this.schoolRepository.findAll())
+                .stream()
+                .map(obj -> obj.getIndetyfikator())
+                .collect(Collectors.toCollection(HashSet::new));
+        if (index.contains(school.getIndetyfikator())) throw new SchoolWithThisIndentificatorAlreadyExistException();
         stringUtilsService.Upper(school);
         school.setIndetyfikator(school.countIndenticator());
         this.schoolRepository.save(school);
