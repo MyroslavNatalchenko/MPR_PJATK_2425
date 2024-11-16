@@ -2,6 +2,7 @@ package pl.edu.pjatk.MPR_Spring_PRJ.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.edu.pjatk.MPR_Spring_PRJ.exception.CanNotEditSchoolException;
 import pl.edu.pjatk.MPR_Spring_PRJ.exception.SchoolNotFoundException;
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.repository.SchoolRepository;
@@ -28,6 +29,9 @@ public class SchoolService {
 
     public List<School> getByName(String name) {
         List<School> schoolList = this.schoolRepository.findByName(name);
+        if (schoolList.isEmpty()) {
+            throw new SchoolNotFoundException();
+        }
         for (School school : schoolList) {
             stringUtilsService.Lower(school);
         }
@@ -36,6 +40,9 @@ public class SchoolService {
 
     public List<School> getByNumber(int number) {
         List<School> schoolList = this.schoolRepository.findByNumber(number);
+        if (schoolList.isEmpty()) {
+            throw new SchoolNotFoundException();
+        }
         for (School school : schoolList) {
             stringUtilsService.Lower(school);
         }
@@ -54,6 +61,9 @@ public class SchoolService {
 
     public List<School> getAll() {
         List<School> schoolList = (List<School>) this.schoolRepository.findAll();
+        if (schoolList.isEmpty()) {
+            throw new SchoolNotFoundException();
+        }
         for (School school : schoolList) {
             stringUtilsService.Lower(school);
         }
@@ -75,8 +85,9 @@ public class SchoolService {
                 schoolOptional.get().setIndetyfikator(school.countIndenticator());
                 schoolRepository.save(schoolOptional. get());
             }
-            else throw new RuntimeException("School not found");
+            else throw new CanNotEditSchoolException();
         }
+        else throw new CanNotEditSchoolException();
     }
 
     public void removeSchool(Long id) {

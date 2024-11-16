@@ -13,4 +13,9 @@ public class SchoolExceptionHandler extends ResponseEntityExceptionHandler{
     public ResponseEntity<Object> handleNotFound(SchoolNotFoundException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value={CanNotEditSchoolException.class})
+    public ResponseEntity<Object> handleCanNotEdit(CanNotEditSchoolException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }
