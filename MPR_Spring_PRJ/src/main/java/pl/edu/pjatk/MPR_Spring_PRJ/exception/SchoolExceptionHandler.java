@@ -18,4 +18,19 @@ public class SchoolExceptionHandler extends ResponseEntityExceptionHandler{
     public ResponseEntity<Object> handleCanNotEdit(CanNotEditSchoolException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value={CanNotDeleteSchoolException.class})
+    public ResponseEntity<Object> handleCanNotDelete(CanNotDeleteSchoolException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value={SchoolWithThisIndentificatorAlreadyExistException.class})
+    public ResponseEntity<Object> handleCanNotCreate(SchoolWithThisIndentificatorAlreadyExistException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+//    @ExceptionHandler(value = {CanNotDeleteSchoolException.class, CanNotEditSchoolException.class, SchoolNotFoundException.class})
+//    public ResponseEntity<Object> handleExceptions(RuntimeException ex){
+//        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+//    }
 }

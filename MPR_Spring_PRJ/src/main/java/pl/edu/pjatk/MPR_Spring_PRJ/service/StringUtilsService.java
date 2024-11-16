@@ -10,9 +10,11 @@ public class StringUtilsService {
     }
 
     public void Lower(School school){
-        String first_part = school.getName().substring(0, 1).toUpperCase();
-        int length = school.getName().length();
-        String second_part = school.getName().substring(1,length).toLowerCase();
-        school.setName(first_part + second_part);
+        if (school.getName() != null && !school.getName().isEmpty()) {
+            String trimmedName = school.getName().trim();
+            String firstPart = trimmedName.substring(0, 1).toUpperCase();
+            String secondPart = trimmedName.substring(1).toLowerCase();
+            school.setName(firstPart + secondPart);
+        }
     }
 }

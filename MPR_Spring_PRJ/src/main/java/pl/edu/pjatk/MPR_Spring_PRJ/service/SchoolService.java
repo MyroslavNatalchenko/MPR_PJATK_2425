@@ -2,8 +2,10 @@ package pl.edu.pjatk.MPR_Spring_PRJ.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.edu.pjatk.MPR_Spring_PRJ.exception.CanNotDeleteSchoolException;
 import pl.edu.pjatk.MPR_Spring_PRJ.exception.CanNotEditSchoolException;
 import pl.edu.pjatk.MPR_Spring_PRJ.exception.SchoolNotFoundException;
+import pl.edu.pjatk.MPR_Spring_PRJ.exception.SchoolWithThisIndentificatorAlreadyExistException;
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.repository.SchoolRepository;
 
@@ -71,6 +73,11 @@ public class SchoolService {
     }
 
     public void createSchool(School school) {
+        List<School> find = (List<School>) this.schoolRepository.findAll();
+        double indet = school.countIndenticator();
+        for (School school1: find){
+            if (indet == school1.getIndetyfikator()) throw new SchoolWithThisIndentificatorAlreadyExistException();
+        }
         stringUtilsService.Upper(school);
         school.setIndetyfikator(school.countIndenticator());
         this.schoolRepository.save(school);
@@ -91,6 +98,10 @@ public class SchoolService {
     }
 
     public void removeSchool(Long id) {
+        Optional<School> school = this.schoolRepository.findById(id);
+        if (school.isEmpty()) {
+            throw new CanNotDeleteSchoolException();
+        }
         this.schoolRepository.deleteById(id);
     }
 }
