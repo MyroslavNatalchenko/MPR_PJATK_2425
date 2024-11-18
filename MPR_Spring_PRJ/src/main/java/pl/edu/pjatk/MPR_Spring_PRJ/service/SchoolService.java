@@ -1,5 +1,10 @@
 package pl.edu.pjatk.MPR_Spring_PRJ.service;
 
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.pjatk.MPR_Spring_PRJ.exception.CanNotDeleteSchoolException;
@@ -9,6 +14,7 @@ import pl.edu.pjatk.MPR_Spring_PRJ.exception.SchoolWithThisIndentificatorAlready
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.repository.SchoolRepository;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -102,6 +108,38 @@ public class SchoolService {
             throw new CanNotDeleteSchoolException();
         }
         this.schoolRepository.deleteById(id);
+    }
+
+    public PDDocument getPDFByID(Long id){
+        Optional<School> trySchool = this.schoolRepository.findById(id);
+        if (trySchool.isEmpty()) {
+            throw new SchoolNotFoundException();
+        }
+
+        School school = trySchool.get();
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
+            contentStream.setLeading(20f);
+            contentStream.newLineAtOffset(50, 750);
+
+            contentStream.showText("School Details:");
+            contentStream.newLine();
+            contentStream.setFont(PDType1Font.HELVETICA, 14);
+            contentStream.showText("Name: " + school.getName());
+            contentStream.newLine();
+            contentStream.showText("Number: " + school.getNumber());
+            contentStream.newLine();
+            contentStream.showText("Identifier: " + school.getIndetyfikator());
+            contentStream.endText();
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing to PDF", e);}
+
+        return document;
     }
 }
 
