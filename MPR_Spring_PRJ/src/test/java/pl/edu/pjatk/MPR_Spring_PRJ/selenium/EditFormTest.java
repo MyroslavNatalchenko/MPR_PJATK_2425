@@ -16,10 +16,13 @@ public class EditFormTest {
     }
 
     @Test
-    public void testEditForm() {
+    public void testEditForm() throws InterruptedException {
         EditFormPage editFormPage = new EditFormPage(driver);
-        editFormPage.open()
-                .fillIdInput("1")
+        driver.get("http://localhost:8080/view/all");
+
+        driver.wait(1000000000); //WTF
+
+        editFormPage.fillIdInput("1")
                 .fillNameInput("TestSchool")
                 .fillNumberInput("404");
         ViewAllPage viewAllPage = editFormPage.submitForm();
