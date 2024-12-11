@@ -14,11 +14,19 @@
         <td>ID</td>
         <td>Nazwa</td>
         <td>Numer</td>
+        <td>Edit School</td>
+        <td>Delete School</td>
     </tr>
     <tr th:each="School : ${schoolList}">
         <td th:text="${School.id}"}></td>
         <td th:text="${School.name}"></td>
         <td th:text="${School.getNumber()}"></td>
+        <td>
+            <a th:href="@{/editSchool(id=${School.id})}">Edit School</a>
+        </td>
+        <td>
+            <a th:href="@{/deleteSchool(id=${School.id})}">Edit School</a>
+        </td>
     </tr>
 </table>
 </body>

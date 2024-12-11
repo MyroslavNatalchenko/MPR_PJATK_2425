@@ -9,11 +9,11 @@
 <h1>Edit School</h1>
 
 <form action="#" th:action="@{/editSchool}" th:abject="${school}" method="post">
-    <input type="text" placeholder="id" th:field="${school.id}">
-    <input type="text" placeholder="Nazwa" th:field="${school.name}">
-    <input type="text" placeholder="Numer" th:field="${school.number}">
+    <input id="id" type="text" placeholder="id" th:field="${school.id}">
+    <input id="name" type="text" placeholder="Nazwa" th:field="${school.name}">
+    <input id="number" type="text" placeholder="Numer" th:field="${school.number}">
 
-    <input type="submit" value="Submit" />
+    <input id="submit" type="submit" value="Submit" />
 </form>
 </body>
 </html>

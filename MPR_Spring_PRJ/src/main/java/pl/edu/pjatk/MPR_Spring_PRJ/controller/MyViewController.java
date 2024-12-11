@@ -2,9 +2,7 @@ package pl.edu.pjatk.MPR_Spring_PRJ.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pjatk.MPR_Spring_PRJ.model.School;
 import pl.edu.pjatk.MPR_Spring_PRJ.service.SchoolService;
 
@@ -40,8 +38,9 @@ public class MyViewController {
 
     // DELETE BY ID
     @GetMapping("/deleteSchool")
-    public String displayDeleteSchool(Model model) {
-        model.addAttribute("school", new School());
+    public String displayDeleteSchool(@RequestParam("id") Long id, Model model) {
+        School editSchool = this.schoolService.getByID(id);
+        model.addAttribute("school", editSchool);
         return "deleteForm";
     }
     @PostMapping("/deleteSchool")
@@ -52,8 +51,9 @@ public class MyViewController {
 
     // DELETE BY ID
     @GetMapping("/editSchool")
-    public String displayEditSchool(Model model) {
-        model.addAttribute("school", new School());
+    public String displayEditSchool(@RequestParam("id") Long id, Model model) {
+        School editSchool = this.schoolService.getByID(id);
+        model.addAttribute("school", editSchool);
         return "editForm";
     }
     @PostMapping("/editSchool")
