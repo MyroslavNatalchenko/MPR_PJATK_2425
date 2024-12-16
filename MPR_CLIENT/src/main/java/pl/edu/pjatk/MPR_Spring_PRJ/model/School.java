@@ -1,14 +1,6 @@
 package pl.edu.pjatk.MPR_Spring_PRJ.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity //za pomoca JPA stworze tabele SQL School (1)
 public class School {
-    @Id //main key
-    @GeneratedValue(strategy = GenerationType.AUTO) //AutoGeneration
     private Long id;
     private String name;
     private int number;
