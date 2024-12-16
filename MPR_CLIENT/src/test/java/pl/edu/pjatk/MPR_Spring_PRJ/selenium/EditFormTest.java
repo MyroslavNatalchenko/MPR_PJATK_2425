@@ -1,5 +1,6 @@
 package pl.edu.pjatk.MPR_Spring_PRJ.selenium;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -10,8 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
-import static org.junit.Assert.assertEquals;
 
 public class EditFormTest {
     WebDriver driver;
@@ -37,6 +36,6 @@ public class EditFormTest {
                 .fillNameInput("TestSchool")
                 .fillNumberInput("404");
         ViewAllPage viewAllPage = editFormPage.submitForm();
-        assertEquals("All Schools:", viewAllPage.getHeader());
+        Assertions.assertEquals("All Schools:", viewAllPage.getHeader());
     }
 }
