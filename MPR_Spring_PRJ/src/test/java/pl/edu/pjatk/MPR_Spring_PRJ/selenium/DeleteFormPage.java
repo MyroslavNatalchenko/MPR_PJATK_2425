@@ -5,14 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class EditFormPage {
+public class DeleteFormPage {
     WebDriver driver;
-
-    @FindBy(id = "id")
-    private WebElement idInput;
-
-    @FindBy(id = "name")
-    private WebElement nameInput;
 
     @FindBy(id = "number")
     private WebElement numberInput;
@@ -20,24 +14,12 @@ public class EditFormPage {
     @FindBy(id = "submit")
     private WebElement submitButton;
 
-    public EditFormPage(WebDriver driver) {
+    public DeleteFormPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this); // <-inicializuje adnotacji FindVy
     }
 
-    public EditFormPage fillIdInput(String id){
-        this.idInput.clear();
-        this.idInput.sendKeys(id);
-        return this;
-    }
-
-    public EditFormPage fillNameInput(String name){
-        this.nameInput.clear();
-        this.nameInput.sendKeys(name);
-        return this;
-    }
-
-    public EditFormPage fillNumberInput(String number){
+    public DeleteFormPage fillNumberInput(String number){
         this.numberInput.clear();
         this.numberInput.sendKeys(number);
         return this;

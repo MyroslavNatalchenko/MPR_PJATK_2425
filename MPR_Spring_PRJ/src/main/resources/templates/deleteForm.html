@@ -10,10 +10,10 @@
 
 <form action="#" th:action="@{/deleteSchool}" th:abject="${school}" method="post">
   <label>
-    <input type="text" placeholder="Numer" th:field="${school.id}">
+    <input id="number" type="text" placeholder="Numer" th:field="${school.id}">
   </label>
 
-  <input type="submit" value="Submit" />
+  <input id="submit" type="submit" value="Submit" />
 </form>
 </body>
 </html>
