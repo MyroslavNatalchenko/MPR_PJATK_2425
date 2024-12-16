@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/forms.css}" rel="stylesheet" />
+  <title>Delete School</title>
+</head>
+<body>
+<h1>Delete School</h1>
+
+<form action="#" th:action="@{/deleteSchool}" th:abject="${school}" method="post">
+  <label>
+    <input id="number" type="text" placeholder="Numer" th:field="${school.id}">
+  </label>
+
+  <input id="submit" type="submit" value="Submit" />
+</form>
+</body>
+</html>

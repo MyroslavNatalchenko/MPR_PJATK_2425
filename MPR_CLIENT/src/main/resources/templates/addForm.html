@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/forms.css}" rel="stylesheet" />
+  <title>Add School</title>
+</head>
+<body>
+<h1>Add School</h1>
+
+<form action="#" th:action="@{/addSchool}" th:abject="${school}" method="post">
+  <input id="name" type="text" placeholder="Nazwa" th:field="${school.name}">
+  <input  id="number" type="text" placeholder="Numer" th:field="${school.number}">
+
+  <input id="submit" type="submit" value="Submit" />
+</form>
+</body>
+</html>
