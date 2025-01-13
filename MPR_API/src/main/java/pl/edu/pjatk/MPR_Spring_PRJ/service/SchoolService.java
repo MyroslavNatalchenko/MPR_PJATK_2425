@@ -29,9 +29,9 @@ public class SchoolService {
         this.schoolRepository = schoolRepository;
         this.stringUtilsService = stringUtilsService;
 
-        this.schoolRepository.save(new School("PJATK WWA", 1));
-        this.schoolRepository.save(new School("PJATK GDN", 2));
-        this.schoolRepository.save(new School("KPNL", 145));
+//        this.schoolRepository.save(new School("PJATK WWA", 1));
+//        this.schoolRepository.save(new School("PJATK GDN", 2));
+//        this.schoolRepository.save(new School("KPNL", 145));
     }
 
     public List<School> getByName(String name) {
